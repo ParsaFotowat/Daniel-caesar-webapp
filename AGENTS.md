@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep showroom content in `src/lib/catalog.ts` and render it through shared components so English and Persian routes stay synchronized.
+  Why: product specifications and translations must remain consistent across browsing and detail views.
