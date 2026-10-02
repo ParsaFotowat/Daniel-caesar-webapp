@@ -18,6 +18,13 @@ export type Watch = {
   features: string[];
 };
 
+export type ShowroomCategory = {
+  label: Localized;
+  detail: Localized;
+  image: string;
+  imagePosition?: string;
+};
+
 export const watches: Watch[] = [
   {
     slug: "meridian-41",
@@ -98,6 +105,45 @@ export const watches: Watch[] = [
       { label: { en: "Reserve", fa: "ذخیره نیرو" }, value: { en: "55 hours", fa: "۵۵ ساعت" } },
       { label: { en: "Water", fa: "مقاومت آب" }, value: { en: "50 metres", fa: "۵۰ متر" } },
     ],
+  },
+];
+
+export const showroomCategories: ShowroomCategory[] = [
+  {
+    label: { en: "Dress", fa: "رسمی" },
+    detail: { en: "2 timepieces", fa: "۲ ساعت" },
+    image: collectionImage,
+    imagePosition: "24% center",
+  },
+  {
+    label: { en: "Chronograph", fa: "کرنوگراف" },
+    detail: { en: "Measured performance", fa: "عملکرد دقیق" },
+    image: collectionImage,
+    imagePosition: "72% center",
+  },
+  {
+    label: { en: "Classic", fa: "کلاسیک" },
+    detail: { en: "Quiet proportions", fa: "تناسبی آرام" },
+    image: heroImage,
+    imagePosition: "43% center",
+  },
+  {
+    label: { en: "Sport", fa: "اسپرت" },
+    detail: { en: "Built for depth", fa: "ساخته‌شده برای عمق" },
+    image: collectionImage,
+    imagePosition: "54% center",
+  },
+  {
+    label: { en: "Skeleton", fa: "اسکلتون" },
+    detail: { en: "The calibre revealed", fa: "نمایش کالیبر" },
+    image: movementImage,
+    imagePosition: "center",
+  },
+  {
+    label: { en: "Automatic", fa: "اتوماتیک" },
+    detail: { en: "Mechanical precision", fa: "دقت مکانیکی" },
+    image: heroImage,
+    imagePosition: "67% center",
   },
 ];
 
