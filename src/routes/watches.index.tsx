@@ -7,7 +7,7 @@ import { watches } from "@/lib/catalog";
 import { useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/watches")({ head: () => ({ meta: [
+export const Route = createFileRoute("/watches/")({ head: () => ({ meta: [
   { title: "Watch Collections — Daniel Caesar" }, { name: "description", content: "Browse Daniel Caesar watches by style, movement, material and performance." }, { property: "og:title", content: "Watch Collections — Daniel Caesar" }, { property: "og:description", content: "Browse Daniel Caesar watches by style, movement, material and performance." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
 ] }), component: WatchesPage });
 

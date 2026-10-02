@@ -5,7 +5,7 @@ import { buttonStyles } from "@/components/ui/button";
 import { watches } from "@/lib/catalog";
 import { pick, useLanguage } from "@/lib/i18n";
 
-export const Route = createFileRoute("/watches/$slug")({
+export const Route = createFileRoute("/watches_/$slug")({
   loader: ({ params }) => { const watch = watches.find((item) => item.slug === params.slug); if (!watch) throw notFound(); return { watch }; },
   head: ({ loaderData }) => { const title = loaderData ? `${loaderData.watch.name} — Daniel Caesar` : "Watch not found — Daniel Caesar"; const description = loaderData?.watch.description.en ?? "Daniel Caesar watch collection."; return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }; },
   component: WatchDetail,
