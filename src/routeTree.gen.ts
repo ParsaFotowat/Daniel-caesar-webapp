@@ -12,8 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandRouteImport } from './routes/brand'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as WarrantyRouteImport } from './routes/warranty'
 import { Route as WatchesIndexRouteImport } from './routes/watches.index'
-import { Route as WatchesSlugRouteImport } from './routes/watches_.$slug'
+import { Route as WatchesSlugRouteImport } from './routes/watches.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,13 +31,18 @@ const JournalRoute = JournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WarrantyRoute = WarrantyRouteImport.update({
+  id: '/warranty',
+  path: '/warranty',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WatchesIndexRoute = WatchesIndexRouteImport.update({
   id: '/watches/',
   path: '/watches/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WatchesSlugRoute = WatchesSlugRouteImport.update({
-  id: '/watches_/$slug',
+  id: '/watches/$slug',
   path: '/watches/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
   '/journal': typeof JournalRoute
+  '/warranty': typeof WarrantyRoute
   '/watches/$slug': typeof WatchesSlugRoute
   '/watches/': typeof WatchesIndexRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
   '/journal': typeof JournalRoute
+  '/warranty': typeof WarrantyRoute
   '/watches/$slug': typeof WatchesSlugRoute
   '/watches': typeof WatchesIndexRoute
 }
@@ -60,21 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
   '/journal': typeof JournalRoute
-  '/watches_/$slug': typeof WatchesSlugRoute
+  '/warranty': typeof WarrantyRoute
+  '/watches/$slug': typeof WatchesSlugRoute
   '/watches/': typeof WatchesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/brand' | '/journal' | '/watches/$slug' | '/watches/'
+  fullPaths:
+    '/' | '/brand' | '/journal' | '/warranty' | '/watches/$slug' | '/watches/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brand' | '/journal' | '/watches/$slug' | '/watches'
-  id: '__root__' | '/' | '/brand' | '/journal' | '/watches_/$slug' | '/watches/'
+  to: '/' | '/brand' | '/journal' | '/warranty' | '/watches/$slug' | '/watches'
+  id:
+    | '__root__'
+    | '/'
+    | '/brand'
+    | '/journal'
+    | '/warranty'
+    | '/watches/$slug'
+    | '/watches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandRoute: typeof BrandRoute
   JournalRoute: typeof JournalRoute
+  WarrantyRoute: typeof WarrantyRoute
   WatchesSlugRoute: typeof WatchesSlugRoute
   WatchesIndexRoute: typeof WatchesIndexRoute
 }
@@ -102,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/warranty': {
+      id: '/warranty'
+      path: '/warranty'
+      fullPath: '/warranty'
+      preLoaderRoute: typeof WarrantyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/watches/': {
       id: '/watches/'
       path: '/watches'
@@ -109,8 +134,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WatchesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/watches_/$slug': {
-      id: '/watches_/$slug'
+    '/watches/$slug': {
+      id: '/watches/$slug'
       path: '/watches/$slug'
       fullPath: '/watches/$slug'
       preLoaderRoute: typeof WatchesSlugRouteImport
@@ -123,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandRoute: BrandRoute,
   JournalRoute: JournalRoute,
+  WarrantyRoute: WarrantyRoute,
   WatchesSlugRoute: WatchesSlugRoute,
   WatchesIndexRoute: WatchesIndexRoute,
 }
