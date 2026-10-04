@@ -148,3 +148,14 @@ export const showroomCategories: ShowroomCategory[] = [
 ];
 
 export const assets = { heroImage, collectionImage, movementImage, journalImage };
+
+export type Retailer = { name: string; city: Localized; address: Localized; phone: string; mapQuery: string };
+
+// Placeholder retailers — replace with the real authorised network.
+export const retailers: Retailer[] = [
+  { name: "Daniel Caesar Boutique", city: { en: "Tehran", fa: "تهران" }, address: { en: "Elahieh, Fereshteh St.", fa: "الهیه، خیابان فرشته" }, phone: "+98 21 0000 0001", mapQuery: "Fereshteh St Tehran" },
+  { name: "Kourosh Mall Atelier", city: { en: "Tehran", fa: "تهران" }, address: { en: "Kourosh Mall, Level 2", fa: "مجتمع کوروش، طبقه دوم" }, phone: "+98 21 0000 0002", mapQuery: "Kourosh Mall Tehran" },
+  { name: "Isfahan Time House", city: { en: "Isfahan", fa: "اصفهان" }, address: { en: "Chaharbagh Abbasi", fa: "چهارباغ عباسی" }, phone: "+98 31 0000 0003", mapQuery: "Chaharbagh Isfahan" },
+  { name: "Shiraz Horology", city: { en: "Shiraz", fa: "شیراز" }, address: { en: "Zand Blvd.", fa: "بلوار زند" }, phone: "+98 71 0000 0004", mapQuery: "Zand Blvd Shiraz" },
+  { name: "Dubai Mall Partner", city: { en: "Dubai", fa: "دبی" }, address: { en: "The Dubai Mall, Fashion Ave.", fa: "دبی مال، فشن اونیو" }, phone: "+971 4 000 0005", mapQuery: "Dubai Mall Fashion Avenue" },
+];

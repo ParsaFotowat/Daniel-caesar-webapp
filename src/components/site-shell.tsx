@@ -6,8 +6,8 @@ import { useLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const copy = {
-  en: { watches: "Watches", brand: "The Maison", journal: "Journal", warranty: "Warranty", menu: "Open menu", close: "Close menu", search: "Search", tagline: "Horology · Est. MMXIV", privacy: "Privacy", terms: "Terms", care: "Care guide", note: "Independent timepieces, composed in quiet light." },
-  fa: { watches: "ساعت‌ها", brand: "درباره برند", journal: "مجله", warranty: "گارانتی", menu: "باز کردن منو", close: "بستن منو", search: "جستجو", tagline: "ساعت‌سازی · از ۲۰۱۴", privacy: "حریم خصوصی", terms: "قوانین", care: "راهنمای نگهداری", note: "ساعت‌های مستقل، ساخته‌شده در نوری آرام." },
+  en: { watches: "Watches", brand: "The Maison", journal: "Journal", warranty: "Warranty", retailers: "Retailers", contact: "Contact", menu: "Open menu", close: "Close menu", search: "Search", tagline: "Horology · Est. MMXIV", privacy: "Privacy", terms: "Terms", care: "Care guide", note: "Independent timepieces, composed in quiet light." },
+  fa: { watches: "ساعت‌ها", brand: "درباره برند", journal: "مجله", warranty: "گارانتی", retailers: "نمایندگی‌ها", contact: "تماس", menu: "باز کردن منو", close: "بستن منو", search: "جستجو", tagline: "ساعت‌سازی · از ۲۰۱۴", privacy: "حریم خصوصی", terms: "قوانین", care: "راهنمای نگهداری", note: "ساعت‌های مستقل، ساخته‌شده در نوری آرام." },
 };
 
 export function SiteHeader() {
@@ -18,6 +18,8 @@ export function SiteHeader() {
     { to: "/watches" as const, label: t.watches },
     { to: "/brand" as const, label: t.brand },
     { to: "/journal" as const, label: t.journal },
+    { to: "/retailers" as const, label: t.retailers },
+    { to: "/contact" as const, label: t.contact },
   ];
   return (
     <header className="relative z-40 border-b border-border/70 bg-background/90 backdrop-blur-xl">
@@ -49,7 +51,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   const { locale } = useLanguage();
   const t = copy[locale];
-  return <footer className="border-t border-border bg-surface-deep"><div className="mx-auto grid max-w-screen-2xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-3 lg:px-10"><div><p className="font-display text-2xl text-foreground">DANIEL CAESAR</p><p className="mt-3 max-w-sm text-sm leading-7 text-muted-foreground">{t.note}</p></div><div className="flex gap-6 text-xs uppercase tracking-[0.14em] text-muted-foreground lg:justify-center"><Link to="/brand">{t.terms}</Link><Link to="/brand">{t.privacy}</Link><Link to="/journal">{t.care}</Link></div><p className="text-xs text-muted-foreground sm:col-span-2 lg:col-span-1 lg:text-end">© 2026 Daniel Caesar Horology</p></div></footer>;
+  return <footer className="border-t border-border bg-surface-deep"><div className="mx-auto grid max-w-screen-2xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-3 lg:px-10"><div><p className="font-display text-2xl text-foreground">DANIEL CAESAR</p><p className="mt-3 max-w-sm text-sm leading-7 text-muted-foreground">{t.note}</p></div><div className="flex flex-wrap gap-6 text-xs uppercase tracking-[0.14em] text-muted-foreground lg:justify-center"><Link to="/brand">{t.terms}</Link><Link to="/brand">{t.privacy}</Link><Link to="/journal">{t.care}</Link><Link to="/retailers">{t.retailers}</Link><Link to="/contact">{t.contact}</Link></div><p className="text-xs text-muted-foreground sm:col-span-2 lg:col-span-1 lg:text-end">© 2026 Daniel Caesar Horology</p></div></footer>;
 }
 
 export function PageShell({ children }: { children: ReactNode }) {
