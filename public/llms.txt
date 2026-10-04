@@ -1,0 +1,23 @@
+# Daniel Caesar Horology
+
+> Independent luxury watch maison. Bilingual (English / Persian) showroom presenting Daniel Caesar timepieces organised by style (Dress, Sport, Chronograph, Skeleton) and features (automatic movement, power reserve, case material, water resistance, sapphire crystal). Every watch carries a QR-based digital warranty.
+
+## Main pages
+- [Home](/): featured Meridian 41, collections and after-care
+- [Watches](/watches): full showroom with style and feature filters
+- [The Maison](/brand): brand story, philosophy and craftsmanship
+- [Journal](/journal): stories on design, craft and care
+- [Authorised retailers](/retailers): official boutiques and partners
+- [Contact](/contact): concierge, private viewings, after-care
+- [Warranty](/warranty): verify a serial number (format DC-YYYY-0000)
+
+## Collections
+- Meridian 41 — Dress, 41 mm titanium, DC-01 automatic, 72 h reserve, 100 m
+- Aurelius 38 — Dress, 38 mm steel, DC-02 automatic, 48 h reserve, 50 m
+- Voyager 42 — Sport, 42 mm steel, DC-03 automatic, 60 h reserve, 300 m
+- Vesper Chronograph — Chronograph, 42 mm steel, DC-C1 automatic, 60 h reserve
+- Nocturne Skeleton — Skeleton, 40 mm titanium, DC-S1 manual, 55 h reserve
+
+## Notes
+- Watches are sold only through authorised retailers; there is no online checkout.
+- Warranty: 10 years from activation.

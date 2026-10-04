@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandRouteImport } from './routes/brand'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as RetailersRouteImport } from './routes/retailers'
-import { Route as WarrantyRouteImport } from './routes/warranty'
+import { Route as WarrantyIndexRouteImport } from './routes/warranty.index'
+import { Route as WarrantySerialRouteImport } from './routes/warranty.$serial'
 import { Route as WatchesIndexRouteImport } from './routes/watches.index'
 import { Route as WatchesSlugRouteImport } from './routes/watches.$slug'
 
@@ -27,6 +29,11 @@ const BrandRoute = BrandRouteImport.update({
   path: '/brand',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JournalRoute = JournalRouteImport.update({
   id: '/journal',
   path: '/journal',
@@ -37,9 +44,14 @@ const RetailersRoute = RetailersRouteImport.update({
   path: '/retailers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WarrantyRoute = WarrantyRouteImport.update({
-  id: '/warranty',
-  path: '/warranty',
+const WarrantyIndexRoute = WarrantyIndexRouteImport.update({
+  id: '/warranty/',
+  path: '/warranty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WarrantySerialRoute = WarrantySerialRouteImport.update({
+  id: '/warranty/$serial',
+  path: '/warranty/$serial',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WatchesIndexRoute = WatchesIndexRouteImport.update({
@@ -56,29 +68,35 @@ const WatchesSlugRoute = WatchesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/contact': typeof ContactRoute
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
-  '/warranty': typeof WarrantyRoute
+  '/warranty/$serial': typeof WarrantySerialRoute
   '/watches/$slug': typeof WatchesSlugRoute
+  '/warranty/': typeof WarrantyIndexRoute
   '/watches/': typeof WatchesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/contact': typeof ContactRoute
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
-  '/warranty': typeof WarrantyRoute
+  '/warranty/$serial': typeof WarrantySerialRoute
   '/watches/$slug': typeof WatchesSlugRoute
+  '/warranty': typeof WarrantyIndexRoute
   '/watches': typeof WatchesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/brand': typeof BrandRoute
+  '/contact': typeof ContactRoute
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
-  '/warranty': typeof WarrantyRoute
+  '/warranty/$serial': typeof WarrantySerialRoute
   '/watches/$slug': typeof WatchesSlugRoute
+  '/warranty/': typeof WarrantyIndexRoute
   '/watches/': typeof WatchesIndexRoute
 }
 export interface FileRouteTypes {
@@ -86,38 +104,46 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/brand'
+    | '/contact'
     | '/journal'
     | '/retailers'
-    | '/warranty'
+    | '/warranty/$serial'
     | '/watches/$slug'
+    | '/warranty/'
     | '/watches/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/brand'
+    | '/contact'
     | '/journal'
     | '/retailers'
-    | '/warranty'
+    | '/warranty/$serial'
     | '/watches/$slug'
+    | '/warranty'
     | '/watches'
   id:
     | '__root__'
     | '/'
     | '/brand'
+    | '/contact'
     | '/journal'
     | '/retailers'
-    | '/warranty'
+    | '/warranty/$serial'
     | '/watches/$slug'
+    | '/warranty/'
     | '/watches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandRoute: typeof BrandRoute
+  ContactRoute: typeof ContactRoute
   JournalRoute: typeof JournalRoute
   RetailersRoute: typeof RetailersRoute
-  WarrantyRoute: typeof WarrantyRoute
+  WarrantySerialRoute: typeof WarrantySerialRoute
   WatchesSlugRoute: typeof WatchesSlugRoute
+  WarrantyIndexRoute: typeof WarrantyIndexRoute
   WatchesIndexRoute: typeof WatchesIndexRoute
 }
 
@@ -137,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrandRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journal': {
       id: '/journal'
       path: '/journal'
@@ -151,11 +184,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RetailersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/warranty': {
-      id: '/warranty'
+    '/warranty/': {
+      id: '/warranty/'
       path: '/warranty'
-      fullPath: '/warranty'
-      preLoaderRoute: typeof WarrantyRouteImport
+      fullPath: '/warranty/'
+      preLoaderRoute: typeof WarrantyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/warranty/$serial': {
+      id: '/warranty/$serial'
+      path: '/warranty/$serial'
+      fullPath: '/warranty/$serial'
+      preLoaderRoute: typeof WarrantySerialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/watches/': {
@@ -178,10 +218,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandRoute: BrandRoute,
+  ContactRoute: ContactRoute,
   JournalRoute: JournalRoute,
   RetailersRoute: RetailersRoute,
-  WarrantyRoute: WarrantyRoute,
+  WarrantySerialRoute: WarrantySerialRoute,
   WatchesSlugRoute: WatchesSlugRoute,
+  WarrantyIndexRoute: WarrantyIndexRoute,
   WatchesIndexRoute: WatchesIndexRoute,
 }
 export const routeTree = rootRouteImport
