@@ -14,16 +14,120 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          contact: string
+          created_at: string
+          id: string
+          message: string
+          name: string
+          topic: string
+        }
+        Insert: {
+          contact: string
+          created_at?: string
+          id?: string
+          message: string
+          name: string
+          topic: string
+        }
+        Update: {
+          contact?: string
+          created_at?: string
+          id?: string
+          message?: string
+          name?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      warranties: {
+        Row: {
+          activated_at: string | null
+          created_at: string
+          id: string
+          model: string
+          owner_name: string | null
+          owner_phone: string | null
+          retailer: string | null
+          sale_date: string | null
+          serial: string
+          status: string
+        }
+        Insert: {
+          activated_at?: string | null
+          created_at?: string
+          id?: string
+          model: string
+          owner_name?: string | null
+          owner_phone?: string | null
+          retailer?: string | null
+          sale_date?: string | null
+          serial: string
+          status?: string
+        }
+        Update: {
+          activated_at?: string | null
+          created_at?: string
+          id?: string
+          model?: string
+          owner_name?: string | null
+          owner_phone?: string | null
+          retailer?: string | null
+          sale_date?: string | null
+          serial?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      activate_warranty: {
+        Args: { _name: string; _phone: string; _serial: string }
+        Returns: string
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      lookup_warranty: {
+        Args: { _serial: string }
+        Returns: {
+          activated_at: string
+          model: string
+          retailer: string
+          sale_date: string
+          serial: string
+          status: string
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +254,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
