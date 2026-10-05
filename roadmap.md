@@ -5,8 +5,10 @@
 - [x] Add brand and journal pages
 - [x] Add warranty lookup states
 - [x] Verify desktop and mobile experiences
-- [ ] Phase 1: Contact page
-- [ ] Phase 1: Retailers page
-- [ ] Phase 1: Nav/footer links
-- [ ] robots.txt, llms.txt, sitemap.xml
-- [ ] Phase 2: Cloud warranty records, QR, activation, admin panel
+- [x] Phase 1: Contact page
+- [x] Phase 1: Retailers page
+- [x] Phase 1: Nav/footer links
+- [x] robots.txt, llms.txt, sitemap.xml
+- [x] Phase 2: Cloud warranty records, QR, activation, admin panel
+- [ ] Phase 3: Sales infrastructure (TSM, sales network)
+- [ ] Phase 4: After-sales service expansion
