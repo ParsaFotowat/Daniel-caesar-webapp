@@ -39,13 +39,26 @@ const copy = {
   },
 };
 
+function firstWatch() {
+  const watch = watches[0];
+  if (!watch) throw new Error("The showroom catalog is empty.");
+  return watch;
+}
+
+function firstDetail(watch: Watch) {
+  const detail = watch.details[0];
+  if (!detail) throw new Error(`No detail presentation is configured for ${watch.name}.`);
+  return detail;
+}
+
 export function WatchShowcase() {
   const { locale } = useLanguage();
   const t = copy[locale];
-  const [selectedSlug, setSelectedSlug] = useState(watches[0].slug);
-  const selected = watches.find((watch) => watch.slug === selectedSlug) ?? watches[0];
+  const fallbackWatch = firstWatch();
+  const [selectedSlug, setSelectedSlug] = useState(fallbackWatch.slug);
+  const selected = watches.find((watch) => watch.slug === selectedSlug) ?? fallbackWatch;
   const [detailKey, setDetailKey] = useState<Watch["details"][number]["key"]>("dial");
-  const detail = selected.details.find((item) => item.key === detailKey) ?? selected.details[0];
+  const detail = selected.details.find((item) => item.key === detailKey) ?? firstDetail(selected);
 
   useEffect(() => setDetailKey("dial"), [selectedSlug]);
 
@@ -152,7 +165,7 @@ export function WatchDetailStrip({ watch }: { watch: Watch }) {
   const { locale } = useLanguage();
   const t = copy[locale];
   const [detailKey, setDetailKey] = useState<Watch["details"][number]["key"]>("dial");
-  const detail = watch.details.find((item) => item.key === detailKey) ?? watch.details[0];
+  const detail = watch.details.find((item) => item.key === detailKey) ?? firstDetail(watch);
 
   return <section className="border-t border-border py-16 lg:py-24">
     <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
