@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { PageShell } from "@/components/site-shell";
 import { WatchCard } from "@/components/watch-card";
+import { WatchShowcase } from "@/components/watch-showcase";
 import { buttonStyles } from "@/components/ui/button";
 import { assets, showroomCategories, watches } from "@/lib/catalog";
 import { pick, useLanguage } from "@/lib/i18n";
@@ -53,6 +54,7 @@ function HomePage() {
         ))}
       </div>
     </section>
+    <WatchShowcase />
     <section className="mx-auto max-w-screen-2xl px-5 py-20 lg:px-10 lg:py-28"><div className="mb-12 text-center"><p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">{t.selectedKicker}</p><h2 className="mx-auto mt-4 max-w-3xl font-display text-4xl sm:text-5xl">{t.selected}</h2><p className="mx-auto mt-4 max-w-xl leading-7 text-muted-foreground">{t.selectedBody}</p><Link to="/watches" className="mt-6 inline-flex items-center gap-2 text-sm text-primary">{t.all}<ArrowRight className="size-4 rtl:rotate-180"/></Link></div><div className="grid gap-x-6 gap-y-12 md:grid-cols-2">{watches.slice(1,5).map((watch) => <WatchCard key={watch.slug} watch={watch}/>)}</div></section>
     <section className="border-y border-border bg-surface-deep"><div className="mx-auto grid max-w-screen-2xl gap-6 px-5 py-16 lg:grid-cols-12 lg:px-10 lg:py-24"><div className="rounded-lg border border-border bg-surface-soft p-7 sm:p-10 lg:col-span-7"><p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">{t.after}</p><h2 className="mt-5 max-w-2xl font-display text-3xl leading-tight sm:text-5xl">{t.verifyTitle}</h2><p className="mt-4 max-w-xl leading-7 text-muted-foreground">{t.verifyBody}</p><Link to="/warranty" className={cn(buttonStyles.primary,"mt-8")}><ShieldCheck className="size-4"/>{t.verify}</Link></div><div className="overflow-hidden rounded-lg border border-border bg-background lg:col-span-5"><img src={assets.movementImage} alt="Daniel Caesar mechanical movement" width={1024} height={768} loading="lazy" className="aspect-video w-full object-cover"/><div className="p-7"><h3 className="font-display text-2xl">{t.atelier}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{t.atelierBody}</p><Link to="/journal" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">{t.read}<ArrowRight className="size-4 rtl:rotate-180"/></Link></div></div></div></section>
   </PageShell>;

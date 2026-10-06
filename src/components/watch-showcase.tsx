@@ -147,3 +147,21 @@ export function WatchShowcase() {
     </>
   );
 }
+
+export function WatchDetailStrip({ watch }: { watch: Watch }) {
+  const { locale } = useLanguage();
+  const t = copy[locale];
+  const [detailKey, setDetailKey] = useState<Watch["details"][number]["key"]>("dial");
+  const detail = watch.details.find((item) => item.key === detailKey) ?? watch.details[0];
+
+  return <section className="border-t border-border py-16 lg:py-24">
+    <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div className="lg:col-span-5"><p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">{t.closer}</p><h2 className="mt-4 font-display text-4xl sm:text-5xl">{t.closerTitle}</h2></div>
+      <p className="max-w-xl leading-8 text-muted-foreground lg:col-span-7 lg:justify-self-end">{pick(watch.story, locale)}</p>
+    </div>
+    <div className="mt-10 grid overflow-hidden border border-border bg-surface-deep lg:grid-cols-12">
+      <div className="relative min-h-[24rem] lg:col-span-8 lg:min-h-[34rem]"><img src={detailKey === "movement" ? assets.calibreDetailImage : assets.dialDetailImage} alt={`${watch.name} ${pick(detail.label, locale)}`} width={1600} height={1008} loading="lazy" className="absolute inset-0 h-full w-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"/><div className="absolute inset-x-0 bottom-0 p-6"><h3 className="font-display text-2xl">{pick(detail.label, locale)}</h3><p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground">{pick(detail.description, locale)}</p></div></div>
+      <div className="flex flex-col justify-center p-5 lg:col-span-4">{watch.details.map((item, index) => <Button key={item.key} type="button" variant="ghost" onClick={() => setDetailKey(item.key)} className={cn("h-auto min-h-0 justify-between rounded-none border-b border-border px-2 py-5 text-start", detailKey === item.key && "text-primary")}><span className="flex items-center gap-3"><span className="text-xs text-muted-foreground">0{index + 1}</span><span className="font-display text-lg">{pick(item.label, locale)}</span></span><ScanSearch className="size-4"/></Button>)}</div>
+    </div>
+  </section>;
+}
