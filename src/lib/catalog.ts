@@ -2,6 +2,8 @@ import heroImage from "@/assets/meridian-hero.jpg";
 import collectionImage from "@/assets/collection-showroom.jpg";
 import movementImage from "@/assets/movement-macro.jpg";
 import journalImage from "@/assets/watchmaker-journal.jpg";
+import dialDetailImage from "@/assets/dial-detail.jpg";
+import calibreDetailImage from "@/assets/calibre-detail.jpg";
 
 export type Locale = "en" | "fa";
 export type Localized = { en: string; fa: string };
@@ -16,7 +18,20 @@ export type Watch = {
   image: string;
   specs: { label: Localized; value: Localized }[];
   features: string[];
+  story: Localized;
+  details: { key: "dial" | "case" | "movement" | "crystal" | "water"; label: Localized; description: Localized }[];
 };
+
+const detailLabels = {
+  dial: { en: "Dial", fa: "صفحه" },
+  case: { en: "Case", fa: "قاب" },
+  movement: { en: "Movement", fa: "موتور" },
+  crystal: { en: "Crystal", fa: "شیشه" },
+  water: { en: "Water resistance", fa: "مقاومت در برابر آب" },
+};
+
+const detailSet = (values: Record<keyof typeof detailLabels, Localized>): Watch["details"] =>
+  (Object.keys(detailLabels) as (keyof typeof detailLabels)[]).map((key) => ({ key, label: detailLabels[key], description: values[key] }));
 
 export type ShowroomCategory = {
   label: Localized;
@@ -35,6 +50,8 @@ export const watches: Watch[] = [
     description: { en: "A study of restraint, finished in deep navy and measured in quiet light.", fa: "مطالعه‌ای در خویشتن‌داری؛ با پرداخت آبی عمیق و سنجیده در نوری آرام." },
     image: heroImage,
     features: ["Automatic", "72h reserve", "Titanium", "Sapphire"],
+    story: { en: "The Meridian balances a textured midnight dial with a light titanium architecture—an everyday calibre reduced to its purest lines.", fa: "مریدین صفحه‌ای بافت‌دار به رنگ نیمه‌شب را با معماری سبک تیتانیومی همراه می‌کند؛ کالیبری روزمره که به خالص‌ترین خطوط خود رسیده است." },
+    details: detailSet({ dial: { en: "Deep navy guilloché catches light without glare.", fa: "گیوشه آبی عمیق، نور را بدون درخشش زننده جذب می‌کند." }, case: { en: "Grade 5 titanium, alternately brushed and polished.", fa: "تیتانیوم گرید ۵ با پرداخت برس‌خورده و صیقلی متناوب." }, movement: { en: "DC-01 automatic calibre with a 72-hour reserve.", fa: "کالیبر اتوماتیک DC-01 با ۷۲ ساعت ذخیره نیرو." }, crystal: { en: "Box sapphire with anti-reflective inner coating.", fa: "شیشه یاقوت کبود با پوشش ضدبازتاب داخلی." }, water: { en: "Sealed and pressure-tested to 100 metres.", fa: "آب‌بندی و آزموده‌شده تا عمق ۱۰۰ متر." } }),
     specs: [
       { label: { en: "Case", fa: "قاب" }, value: { en: "41 mm titanium", fa: "تیتانیوم ۴۱ میلی‌متری" } },
       { label: { en: "Movement", fa: "موتور" }, value: { en: "DC-01 automatic", fa: "اتوماتیک DC-01" } },
@@ -51,6 +68,8 @@ export const watches: Watch[] = [
     description: { en: "An ivory dial and slim profile for formal, unhurried moments.", fa: "صفحه عاجی و بدنه باریک برای لحظه‌های رسمی و بی‌شتاب." },
     image: collectionImage,
     features: ["Automatic", "Slim case", "Sapphire"],
+    story: { en: "Aurelius is defined by proportion: a slim steel case, warm ivory dial and a restrained profile for formal hours.", fa: "اورلیوس با تناسب تعریف می‌شود؛ قاب باریک استیل، صفحه عاجی گرم و فرمی آرام برای ساعت‌های رسمی." },
+    details: detailSet({ dial: { en: "Warm ivory lacquer with slender applied markers.", fa: "لاک عاجی گرم با نشانگرهای باریک برجسته." }, case: { en: "A compact 38 mm steel case with a fine polished bezel.", fa: "قاب جمع‌وجور ۳۸ میلی‌متری استیل با بزل ظریف صیقلی." }, movement: { en: "Slim DC-02 automatic calibre, tuned for daily wear.", fa: "کالیبر باریک اتوماتیک DC-02، تنظیم‌شده برای استفاده روزانه." }, crystal: { en: "Domed sapphire preserves its classically curved profile.", fa: "یاقوت کبود گنبدی، فرم کلاسیک و منحنی ساعت را حفظ می‌کند." }, water: { en: "Protected to 50 metres for refined daily use.", fa: "مقاوم تا ۵۰ متر برای استفاده روزمره ظریف." } }),
     specs: [
       { label: { en: "Case", fa: "قاب" }, value: { en: "38 mm steel", fa: "استیل ۳۸ میلی‌متری" } },
       { label: { en: "Movement", fa: "موتور" }, value: { en: "DC-02 automatic", fa: "اتوماتیک DC-02" } },
@@ -67,6 +86,8 @@ export const watches: Watch[] = [
     description: { en: "A steel sports watch engineered for daily depth and distance.", fa: "ساعتی اسپرت از جنس استیل، مهندسی‌شده برای عمق و مسیر روزانه." },
     image: collectionImage,
     features: ["Automatic", "Ceramic", "300m water", "Sapphire"],
+    story: { en: "Voyager brings robust engineering into a clean silhouette, built for depth, travel and constant use.", fa: "وویجر مهندسی مقاوم را در فرمی پاک ارائه می‌کند؛ ساخته‌شده برای عمق، سفر و استفاده مداوم." },
+    details: detailSet({ dial: { en: "High-contrast markers remain legible in low light.", fa: "نشانگرهای پرکنتراست در نور کم نیز خوانا می‌مانند." }, case: { en: "A protective 42 mm steel shell with crown guards.", fa: "پوسته محافظ ۴۲ میلی‌متری استیل با محافظ تاج." }, movement: { en: "Shock-resistant DC-03 automatic calibre.", fa: "کالیبر اتوماتیک ضدضربه DC-03." }, crystal: { en: "Thick sapphire engineered for pressure and clarity.", fa: "یاقوت کبود ضخیم، مهندسی‌شده برای فشار و شفافیت." }, water: { en: "Individually pressure-tested to 300 metres.", fa: "هر نمونه به‌صورت جداگانه تا عمق ۳۰۰ متر آزموده می‌شود." } }),
     specs: [
       { label: { en: "Case", fa: "قاب" }, value: { en: "42 mm steel", fa: "استیل ۴۲ میلی‌متری" } },
       { label: { en: "Movement", fa: "موتور" }, value: { en: "DC-03 automatic", fa: "اتوماتیک DC-03" } },
@@ -83,6 +104,8 @@ export const watches: Watch[] = [
     description: { en: "A column-wheel chronograph with measured contrast and tactile control.", fa: "کرنوگراف چرخ‌ستونی با کنتراست سنجیده و کنترل ملموس." },
     image: collectionImage,
     features: ["Chronograph", "Automatic", "Ceramic", "Sapphire"],
+    story: { en: "Vesper turns elapsed time into a tactile ritual through crisp pushers, measured contrast and a column-wheel heart.", fa: "وسپر با دکمه‌های دقیق، کنتراست سنجیده و قلب چرخ‌ستونی، زمان‌سنجی را به آیینی ملموس تبدیل می‌کند." },
+    details: detailSet({ dial: { en: "Layered registers separate timing data at a glance.", fa: "صفحات فرعی لایه‌دار، اطلاعات زمان‌سنجی را در یک نگاه جدا می‌کنند." }, case: { en: "Sculpted steel balances the pushers and ceramic bezel.", fa: "استیل تراش‌خورده، دکمه‌ها و بزل سرامیکی را متعادل می‌کند." }, movement: { en: "DC-C1 column-wheel chronograph with vertical clutch.", fa: "کرنوگراف چرخ‌ستونی DC-C1 با کلاچ عمودی." }, crystal: { en: "Flush sapphire keeps the profile controlled and clear.", fa: "یاقوت کبود هم‌سطح، فرم را کنترل‌شده و شفاف نگه می‌دارد." }, water: { en: "Chronograph seals tested to 100 metres.", fa: "آب‌بندی کرنوگراف تا عمق ۱۰۰ متر آزموده شده است." } }),
     specs: [
       { label: { en: "Case", fa: "قاب" }, value: { en: "42 mm steel", fa: "استیل ۴۲ میلی‌متری" } },
       { label: { en: "Movement", fa: "موتور" }, value: { en: "DC-C1 automatic", fa: "اتوماتیک DC-C1" } },
@@ -99,6 +122,8 @@ export const watches: Watch[] = [
     description: { en: "An open-worked calibre exposing the rhythm beneath the dial.", fa: "کالیبری اسکلتون که ریتم پنهان زیر صفحه را آشکار می‌کند." },
     image: movementImage,
     features: ["Skeleton", "Manual wind", "Sapphire"],
+    story: { en: "Nocturne removes the dial to reveal the rhythm beneath it, framing hand-finished bridges in a quiet titanium case.", fa: "نوکتورن صفحه را کنار می‌زند تا ریتم زیر آن آشکار شود و پل‌های پرداخت‌شده با دست را در قاب آرام تیتانیومی نمایش دهد." },
+    details: detailSet({ dial: { en: "An open-worked chapter ring frames the moving calibre.", fa: "حلقه ساعت اسکلتون، کالیبر متحرک را قاب می‌گیرد." }, case: { en: "Lightweight 40 mm titanium keeps the mechanics central.", fa: "تیتانیوم سبک ۴۰ میلی‌متری، مکانیک را در مرکز توجه نگه می‌دارد." }, movement: { en: "Hand-wound DC-S1 with visible balance and 55-hour reserve.", fa: "DC-S1 کوکی با بالانس نمایان و ۵۵ ساعت ذخیره نیرو." }, crystal: { en: "Front and rear sapphire create an uninterrupted view.", fa: "یاقوت کبود جلو و پشت، نمایی پیوسته ایجاد می‌کند." }, water: { en: "Sealed to 50 metres without obscuring the calibre.", fa: "آب‌بندی تا ۵۰ متر بدون پوشاندن کالیبر." } }),
     specs: [
       { label: { en: "Case", fa: "قاب" }, value: { en: "40 mm titanium", fa: "تیتانیوم ۴۰ میلی‌متری" } },
       { label: { en: "Movement", fa: "موتور" }, value: { en: "DC-S1 manual", fa: "دستی DC-S1" } },
@@ -147,7 +172,7 @@ export const showroomCategories: ShowroomCategory[] = [
   },
 ];
 
-export const assets = { heroImage, collectionImage, movementImage, journalImage };
+export const assets = { heroImage, collectionImage, movementImage, journalImage, dialDetailImage, calibreDetailImage };
 
 export type Retailer = { name: string; city: Localized; address: Localized; phone: string; mapQuery: string };
 
