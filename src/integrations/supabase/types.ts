@@ -62,39 +62,132 @@ export type Database = {
       warranties: {
         Row: {
           activated_at: string | null
+          batch_id: string | null
+          code: string
           created_at: string
+          expires_at: string | null
           id: string
           model: string
+          owner_email: string | null
           owner_name: string | null
           owner_phone: string | null
           retailer: string | null
           sale_date: string | null
           serial: string
           status: string
+          variant_barcode: string | null
         }
         Insert: {
           activated_at?: string | null
+          batch_id?: string | null
+          code?: string
           created_at?: string
+          expires_at?: string | null
           id?: string
           model: string
+          owner_email?: string | null
           owner_name?: string | null
           owner_phone?: string | null
           retailer?: string | null
           sale_date?: string | null
           serial: string
           status?: string
+          variant_barcode?: string | null
         }
         Update: {
           activated_at?: string | null
+          batch_id?: string | null
+          code?: string
           created_at?: string
+          expires_at?: string | null
           id?: string
           model?: string
+          owner_email?: string | null
           owner_name?: string | null
           owner_phone?: string | null
           retailer?: string | null
           sale_date?: string | null
           serial?: string
           status?: string
+          variant_barcode?: string | null
+        }
+        Relationships: []
+      }
+      warranty_batches: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          qty: number
+          variant_barcode: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          qty: number
+          variant_barcode: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          qty?: number
+          variant_barcode?: string
+        }
+        Relationships: []
+      }
+      warranty_events: {
+        Row: {
+          actor: string | null
+          created_at: string
+          id: number
+          type: string
+          warranty_id: string
+        }
+        Insert: {
+          actor?: string | null
+          created_at?: string
+          id?: number
+          type: string
+          warranty_id: string
+        }
+        Update: {
+          actor?: string | null
+          created_at?: string
+          id?: number
+          type?: string
+          warranty_id?: string
+        }
+        Relationships: []
+      }
+      watch_variants: {
+        Row: {
+          barcode: string
+          case_band: string
+          dial: string
+          factory_no: string
+          model_no: string
+          qty_ordered: number
+          serial_seq: number
+        }
+        Insert: {
+          barcode: string
+          case_band: string
+          dial: string
+          factory_no: string
+          model_no: string
+          qty_ordered?: number
+          serial_seq?: number
+        }
+        Update: {
+          barcode?: string
+          case_band?: string
+          dial?: string
+          factory_no?: string
+          model_no?: string
+          qty_ordered?: number
+          serial_seq?: number
         }
         Relationships: []
       }
@@ -104,7 +197,15 @@ export type Database = {
     }
     Functions: {
       activate_warranty: {
-        Args: { _name: string; _phone: string; _serial: string }
+        Args: { _code: string; _email: string; _name: string; _phone?: string }
+        Returns: string
+      }
+      create_model_batches: {
+        Args: { _model_no: string }
+        Returns: number
+      }
+      create_warranty_batch: {
+        Args: { _barcode: string; _qty: number }
         Returns: string
       }
       has_role: {
@@ -115,12 +216,13 @@ export type Database = {
         Returns: boolean
       }
       lookup_warranty: {
-        Args: { _serial: string }
+        Args: { _code: string }
         Returns: {
-          activated_at: string
+          activated_at: string | null
+          case_band: string | null
+          dial: string | null
+          expires_at: string | null
           model: string
-          retailer: string
-          sale_date: string
           serial: string
           status: string
         }[]
