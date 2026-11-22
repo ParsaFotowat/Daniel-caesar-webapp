@@ -17,7 +17,7 @@ import { Route as JournalRouteImport } from './routes/journal'
 import { Route as RetailersRouteImport } from './routes/retailers'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as WarrantyIndexRouteImport } from './routes/warranty.index'
-import { Route as WarrantySerialRouteImport } from './routes/warranty.$serial'
+import { Route as WarrantyCodeRouteImport } from './routes/warranty.$code'
 import { Route as WatchesIndexRouteImport } from './routes/watches.index'
 import { Route as WatchesSlugRouteImport } from './routes/watches.$slug'
 
@@ -61,9 +61,9 @@ const WarrantyIndexRoute = WarrantyIndexRouteImport.update({
   path: '/warranty/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WarrantySerialRoute = WarrantySerialRouteImport.update({
-  id: '/warranty/$serial',
-  path: '/warranty/$serial',
+const WarrantyCodeRoute = WarrantyCodeRouteImport.update({
+  id: '/warranty/$code',
+  path: '/warranty/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WatchesIndexRoute = WatchesIndexRouteImport.update({
@@ -85,7 +85,7 @@ export interface FileRoutesByFullPath {
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/warranty/$serial': typeof WarrantySerialRoute
+  '/warranty/$code': typeof WarrantyCodeRoute
   '/watches/$slug': typeof WatchesSlugRoute
   '/warranty/': typeof WarrantyIndexRoute
   '/watches/': typeof WatchesIndexRoute
@@ -98,7 +98,7 @@ export interface FileRoutesByTo {
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/warranty/$serial': typeof WarrantySerialRoute
+  '/warranty/$code': typeof WarrantyCodeRoute
   '/watches/$slug': typeof WatchesSlugRoute
   '/warranty': typeof WarrantyIndexRoute
   '/watches': typeof WatchesIndexRoute
@@ -112,7 +112,7 @@ export interface FileRoutesById {
   '/journal': typeof JournalRoute
   '/retailers': typeof RetailersRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/warranty/$serial': typeof WarrantySerialRoute
+  '/warranty/$code': typeof WarrantyCodeRoute
   '/watches/$slug': typeof WatchesSlugRoute
   '/warranty/': typeof WarrantyIndexRoute
   '/watches/': typeof WatchesIndexRoute
@@ -127,7 +127,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/retailers'
     | '/sitemap.xml'
-    | '/warranty/$serial'
+    | '/warranty/$code'
     | '/watches/$slug'
     | '/warranty/'
     | '/watches/'
@@ -140,7 +140,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/retailers'
     | '/sitemap.xml'
-    | '/warranty/$serial'
+    | '/warranty/$code'
     | '/watches/$slug'
     | '/warranty'
     | '/watches'
@@ -153,7 +153,7 @@ export interface FileRouteTypes {
     | '/journal'
     | '/retailers'
     | '/sitemap.xml'
-    | '/warranty/$serial'
+    | '/warranty/$code'
     | '/watches/$slug'
     | '/warranty/'
     | '/watches/'
@@ -167,7 +167,7 @@ export interface RootRouteChildren {
   JournalRoute: typeof JournalRoute
   RetailersRoute: typeof RetailersRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  WarrantySerialRoute: typeof WarrantySerialRoute
+  WarrantyCodeRoute: typeof WarrantyCodeRoute
   WatchesSlugRoute: typeof WatchesSlugRoute
   WarrantyIndexRoute: typeof WarrantyIndexRoute
   WatchesIndexRoute: typeof WatchesIndexRoute
@@ -231,11 +231,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WarrantyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/warranty/$serial': {
-      id: '/warranty/$serial'
-      path: '/warranty/$serial'
-      fullPath: '/warranty/$serial'
-      preLoaderRoute: typeof WarrantySerialRouteImport
+    '/warranty/$code': {
+      id: '/warranty/$code'
+      path: '/warranty/$code'
+      fullPath: '/warranty/$code'
+      preLoaderRoute: typeof WarrantyCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/watches/': {
@@ -263,7 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   JournalRoute: JournalRoute,
   RetailersRoute: RetailersRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  WarrantySerialRoute: WarrantySerialRoute,
+  WarrantyCodeRoute: WarrantyCodeRoute,
   WatchesSlugRoute: WatchesSlugRoute,
   WarrantyIndexRoute: WarrantyIndexRoute,
   WatchesIndexRoute: WatchesIndexRoute,
