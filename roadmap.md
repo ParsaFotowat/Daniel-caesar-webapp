@@ -14,6 +14,7 @@
   - [x] Bulk code generation, QR label sheets, CSV export, search and void in the staff panel
   - [ ] Confirmation email provider (needs RESEND_API_KEY and WARRANTY_EMAIL_FROM secrets)
   - [ ] SMS confirmation
+- [x] Move off Lovable: own Supabase project, plain Vite build, Vercel hosting
 - [ ] Phase 3: Sales infrastructure (TSM, sales network)
   - [x] Immersive watch and collection demonstration
 - [ ] Phase 4: After-sales service expansion

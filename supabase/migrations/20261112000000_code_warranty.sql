@@ -49,7 +49,6 @@ alter table public.warranties
   add column expires_at timestamptz;
 create index warranties_batch_idx on public.warranties (batch_id);
 create index warranties_variant_idx on public.warranties (variant_barcode);
-update public.warranties set expires_at = activated_at + interval '1 year' where activated_at is not null;
 
 -- 4. Event history, written by trigger so every path is recorded.
 create table public.warranty_events (

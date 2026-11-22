@@ -1,3 +1,4 @@
+-- Roles, warranties (original version) and contact messages.
 create type public.app_role as enum ('admin','user');
 create table public.user_roles (id uuid primary key default gen_random_uuid(), user_id uuid not null references auth.users(id) on delete cascade, role app_role not null, unique(user_id, role));
 grant select on public.user_roles to authenticated; grant all on public.user_roles to service_role;
@@ -41,8 +42,3 @@ begin
   return 'activated';
 end $$;
 grant execute on function public.lookup_warranty(text), public.activate_warranty(text,text,text) to anon, authenticated;
-
-insert into public.warranties (serial, model, retailer, sale_date, status, activated_at) values
- ('DC-2026-0001','Meridian 41','Daniel Caesar Boutique','2026-03-12','active', now()),
- ('DC-2026-0042','Nocturne Skeleton','Isfahan Time House','2026-05-02','active', now()),
- ('DC-2026-0100','Voyager 42','Shiraz Horology',null,'pending', null);
