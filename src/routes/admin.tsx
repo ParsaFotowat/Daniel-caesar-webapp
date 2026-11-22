@@ -25,7 +25,7 @@ export const Route = createFileRoute("/admin")({
 
 const copy = {
   en: {
-    title: "Staff panel", email: "Email", password: "Password", signIn: "Sign in", signUp: "Create account", toUp: "Need an account? Sign up", toIn: "Have an account? Sign in", confirm: "Check your email to confirm your account.", signOut: "Sign out",
+    title: "Staff panel", email: "Email", password: "Password", signIn: "Sign in", signingIn: "Signing in…", failed: "Could not reach the server. Please try again.", staffOnly: "Staff accounts are created by the owner in Supabase.", signOut: "Sign out",
     noAccess: "Your account does not have staff access yet. Ask the owner to grant the admin role.",
     stats: { total: "Codes generated", pending: "Not activated", active: "Activated", void: "Void" },
     generate: "Generate warranty codes", generateBody: "Each watch gets its own serial and secret 12-character code. Pick a model, then generate the whole order or a single colour.",
@@ -39,7 +39,7 @@ const copy = {
     messages: "Contact messages",
   },
   fa: {
-    title: "پنل کارکنان", email: "ایمیل", password: "رمز عبور", signIn: "ورود", signUp: "ساخت حساب", toUp: "حساب ندارید؟ ثبت‌نام", toIn: "حساب دارید؟ ورود", confirm: "برای تأیید حساب، ایمیل خود را بررسی کنید.", signOut: "خروج",
+    title: "پنل کارکنان", email: "ایمیل", password: "رمز عبور", signIn: "ورود", signingIn: "در حال ورود…", failed: "ارتباط با سرور برقرار نشد. دوباره تلاش کنید.", staffOnly: "حساب کارکنان را مالک در Supabase می‌سازد.", signOut: "خروج",
     noAccess: "حساب شما هنوز دسترسی کارکنان ندارد. از مالک بخواهید نقش مدیر را به شما بدهد.",
     stats: { total: "کدهای تولیدشده", pending: "فعال‌نشده", active: "فعال‌شده", void: "باطل" },
     generate: "تولید کد گارانتی", generateBody: "هر ساعت یک سریال و یک کد محرمانه ۱۲ کاراکتری می‌گیرد. مدل را انتخاب کنید و برای کل سفارش یا یک رنگ کد بسازید.",
@@ -79,20 +79,26 @@ function AdminPage() {
 }
 
 function SignIn({ t }: { t: Copy }) {
-  const [mode, setMode] = useState<"in" | "up">("in");
+  const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const f = new FormData(e.currentTarget);
-    const email = String(f.get("email")); const password = String(f.get("password"));
-    const { error } = mode === "in" ? await supabase.auth.signInWithPassword({ email, password }) : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/admin` } });
-    setMsg(error ? error.message : mode === "up" ? t.confirm : "");
+    setBusy(true); setMsg("");
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email: String(f.get("email")).trim(), password: String(f.get("password")) });
+      if (error) setMsg(error.message);
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : t.failed);
+    } finally {
+      setBusy(false);
+    }
   }
   return <form onSubmit={submit} className="mt-8 grid max-w-sm gap-3">
-    <input name="email" type="email" required dir="ltr" placeholder={t.email} className={field} />
-    <input name="password" type="password" required minLength={8} dir="ltr" placeholder={t.password} className={field} />
-    <Button type="submit">{mode === "in" ? t.signIn : t.signUp}</Button>
-    <button type="button" className="text-start text-sm text-muted-foreground" onClick={() => setMode(mode === "in" ? "up" : "in")}>{mode === "in" ? t.toUp : t.toIn}</button>
-    {msg && <p className="text-sm text-primary">{msg}</p>}
+    <input name="email" type="email" required dir="ltr" autoComplete="username" placeholder={t.email} className={field} />
+    <input name="password" type="password" required dir="ltr" autoComplete="current-password" placeholder={t.password} className={field} />
+    <Button type="submit" disabled={busy}>{busy ? t.signingIn : t.signIn}</Button>
+    <p className="text-sm text-muted-foreground">{t.staffOnly}</p>
+    {msg && <p role="alert" className="text-sm text-destructive">{msg}</p>}
   </form>;
 }
 
